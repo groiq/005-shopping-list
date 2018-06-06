@@ -1,9 +1,11 @@
 package shopping.list;
 
+import inout.Out;
+
 public class ShoppingMain {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		Out.println("first, call shopping list statically");
 
 	}
 
