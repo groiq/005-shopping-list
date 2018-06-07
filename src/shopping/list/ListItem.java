@@ -60,9 +60,14 @@ class ListItem {
 	@Override
 	public String toString() {
 		String result;
-		result =  "ListItem [getQuantity()=" + getQuantity() + ", getDescription()=" + getDescription()
-				+ ", getDefaultQuantity()=" + getDefaultQuantity() + ", getUnit()=" + getUnit() + ", getProductGroup()="
-				+ getProductGroup() + ", getNeeded()=" + getNeeded() + "]";
+		if (getQuantity() == 0) {
+			result = "No " + getDescription() + " currently needed.";
+		} else {
+			result = getQuantity() + " " + unit + " of " + description + " are currently needed.";
+		}
+//		result =  "ListItem [getQuantity()=" + getQuantity() + ", getDescription()=" + getDescription()
+//				+ ", getDefaultQuantity()=" + getDefaultQuantity() + ", getUnit()=" + getUnit() + ", getProductGroup()="
+//				+ getProductGroup() + ", getNeeded()=" + getNeeded() + "]";
 		
 		return result;
 	}

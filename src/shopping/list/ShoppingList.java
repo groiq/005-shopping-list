@@ -11,6 +11,7 @@ public class ShoppingList {
 	static void newItem(String description, Unit unit, int defaultQuantity, ProductGroup productGroup) {
 		ListItem item = new ListItem(description, unit, defaultQuantity, productGroup);
 		Out.println(item.getStats());
+		Out.println(item);
 		// TODO put item into list
 		
 		 
