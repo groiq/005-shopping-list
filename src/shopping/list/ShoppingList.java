@@ -8,10 +8,9 @@ public class ShoppingList {
 		// TODO Auto-generated constructor stub
 	}
 
-	static void newItem(String description, Unit unit, int default_quantity, ProductGroup productGroup) {
-		// TODO create a new item
-		ListItem item = new ListItem(description, unit, default_quantity, productGroup);
-		Out.println(item);
+	static void newItem(String description, Unit unit, int defaultQuantity, ProductGroup productGroup) {
+		ListItem item = new ListItem(description, unit, defaultQuantity, productGroup);
+		Out.println(item.getStats());
 		// TODO put item into list
 		
 		 
