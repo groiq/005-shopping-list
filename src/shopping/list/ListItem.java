@@ -54,7 +54,7 @@ class ListItem {
 	String getStats() {
 		return "ListItem [description: " + getDescription() + ", product group: " 
 				+ getProductGroup() + ", currently needed: " + getQuantity()
-				+ " (default: " + getDefaultQuantity() + ") " + getUnit() + "]";
+				+ " " + getUnit() + " (default: " + getDefaultQuantity() + ")]";
 	}
 
 	@Override

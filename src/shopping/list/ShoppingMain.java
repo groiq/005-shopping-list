@@ -7,7 +7,7 @@ public class ShoppingMain {
 
 	public static void main(String[] args) {
 		
-		Out.println("read text file");
+		ShoppingList groceryList = new ShoppingList();
 		
 		In.open("GroceryInit.txt");
 		if (!In.done()) {
@@ -23,7 +23,7 @@ public class ShoppingMain {
 			int defaultQuantity = In.readInt();
 			Out.print("Created: ");
 			// comment this out to test for empty list
-			ShoppingList.newItem(descr, unit, defaultQuantity, pg);
+			groceryList.newItem(descr, unit, defaultQuantity, pg);
 			descr = In.readWord();
 			
 		}
