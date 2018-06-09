@@ -67,7 +67,7 @@ public class ShoppingList {
 		while (currNode.getNextNode() != null) {
 			currNode = currNode.getNextNode();
 			if (interimList[listPosition] == true) {
-				result[resultCounter] = currNode.getItem().toString();	// todo: make a short description
+				result[resultCounter] = currNode.getItem().getStats();	// todo: make a short description
 				resultCounter += 1;
 			}
 			listPosition += 1;
