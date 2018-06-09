@@ -4,3 +4,5 @@ juice drinks liters 2
 milk cooling liters 4
 meat cooling kilo 1
 butter cooling packs 2
+salad produce packs 1
+apples produce kilo 2
