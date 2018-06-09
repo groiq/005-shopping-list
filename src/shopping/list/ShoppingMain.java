@@ -21,12 +21,20 @@ public class ShoppingMain {
 			ProductGroup pg = ProductGroup.valueOf(In.readWord());
 			Unit unit = Unit.valueOf(In.readWord());
 			int defaultQuantity = In.readInt();
-			Out.print("Created: ");
+//			Out.print("Created: ");
 			// comment this out to test for empty list
 			groceryList.newItem(descr, unit, defaultQuantity, pg);
 			descr = In.readWord();
 			
 		}
+		
+		
+		
+		// REad
+		
+		// Update
+		
+		// Delete
 		
 		
 		

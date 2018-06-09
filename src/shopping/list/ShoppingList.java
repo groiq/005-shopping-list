@@ -4,20 +4,58 @@ import inout.Out;
 
 public class ShoppingList {
 	
-	private ListNode firstNode;
+//	Fields, constructor, getters, setters
+//	-------------------------------------
+	
+	private final ListNode dummyNode;
+	private int counter;
 
 	public ShoppingList() {
-		this.firstNode = new ListNode(1, null);
+		this.dummyNode = new ListNode(0, null);
+		counter = 0;
 	}
 
+	int getCounter() {
+		return counter;
+	}
+
+	void setCounter(int counter) {
+		this.counter = counter;
+	}
+
+	ListNode getDummyNode() {
+		return dummyNode;
+	}
+	
+//	Create
+//	-----
+
 	void newItem(String description, Unit unit, int defaultQuantity, ProductGroup productGroup) {
-		ListItem item = new ListItem(description, unit, defaultQuantity, productGroup);
-		Out.println(item.getStats());
-		Out.println(item);
+		ListItem newItem = new ListItem(description, unit, defaultQuantity, productGroup);
+		Out.println(newItem.getStats());
+//		Out.println(item);
+		counter += 1;
+		ListNode newNode = new ListNode(counter, newItem);
+		ListNode prevNode = dummyNode;
+		Out.print(newNode.getQuantity() + ", " + newItem.getQuantity());
+		while (newNode.getProductOrder() > prevNode.getProductOrder() && prevNode.getNextNode() != null) {
+//		while (item.getProductGroup().compareTo(currNode.getProductGroup()) > 0) {
+			prevNode = prevNode.getNextNode();
+		}
+		newNode.setNextNode(prevNode.getNextNode());
+		prevNode.setNextNode(newNode);
+			
+
 		// TODO put item into list
 		
 		 
 		
 	}
+	
+//	Read
+	
+//	Update
+	
+//	Delete
 
 }
