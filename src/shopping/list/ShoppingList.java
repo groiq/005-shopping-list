@@ -38,7 +38,8 @@ public class ShoppingList {
 		ListNode newNode = new ListNode(counter, newItem);
 		ListNode prevNode = dummyNode;
 //		Out.print(newNode.getQuantity() + ", " + newItem.getQuantity());
-		while (newNode.getProductOrder() > prevNode.getProductOrder() && prevNode.getNextNode() != null) {
+		while (prevNode.getNextNode() != null && newNode.getProductOrder() > prevNode.getNextNode().getProductOrder()) {
+//		while (newNode.getProductOrder() > prevNode.getProductOrder() && prevNode.getNextNode() != null) {
 //		while (item.getProductGroup().compareTo(currNode.getProductGroup()) > 0) {
 			prevNode = prevNode.getNextNode();
 		}
