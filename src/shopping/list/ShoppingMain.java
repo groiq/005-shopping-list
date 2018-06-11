@@ -44,8 +44,10 @@ public class ShoppingMain {
 		getAll();
 		
 		// REad
-		
-		printList(groceryList.getByProductGroup(aaa),"Showing group aaa:");
+		ProductGroup[] singleProductGroup = {aaa};
+		printList(groceryList.getByProductGroup(singleProductGroup),"Showing group aaa:");
+		ProductGroup[] twoProductGroups = {bbb,ccc};
+		printList(groceryList.getByProductGroup(twoProductGroups),"Showing two product groups:");
 		printList(groceryList.getByUnit(packs),"Showing all packs:");
 		printList(groceryList.getByQuantity(4),"Showing by quantity 4:");
 		printList(groceryList.getByID(6),"Showing item no 6:");

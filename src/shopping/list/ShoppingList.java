@@ -46,7 +46,7 @@ public class ShoppingList {
 	
 //	Read
 	
-	private String[] getNodesBy(ProductGroup productGroup, Unit unit, int quantity, int id) {
+	private String[] getNodesBy(ProductGroup[] productGroups, Unit unit, int quantity, int id) {
 		boolean[] interimList = new boolean[counter];
 		int listPosition = 0;
 		int resultCounter = 0;
@@ -56,7 +56,15 @@ public class ShoppingList {
 			// insert check for conditions here
 			boolean itemSelected = true;
 			// !!! This might run into trouble after deleting some nodes!
-			if (productGroup != null && currNode.getProductGroup() != productGroup) { itemSelected = false; }
+//			if (productGroup != null && currNode.getProductGroup() != productGroup) { itemSelected = false; }
+			if (productGroups != null) {
+				itemSelected = false;
+				for (ProductGroup productGroup : productGroups) {
+					if (currNode.getProductGroup() == productGroup) { itemSelected = true; }
+				}
+			}
+			// If I have another parameter before this, I'll need a return statement, otherwise itemSelected could be already false 
+			// and then be set to true by this piece of code.
 			if (unit != null && currNode.getUnit() != unit) { itemSelected = false; }
 			if (quantity != 0 && currNode.getQuantity() != quantity) { itemSelected = false; }
 			if (id != 0 && currNode.getId() != id) { itemSelected = false; }
@@ -91,8 +99,8 @@ public class ShoppingList {
 		
 	}
 	
-	public String[] getByProductGroup(ProductGroup productGroup) {
-		return getNodesBy(productGroup, null, 0, 0);
+	public String[] getByProductGroup(ProductGroup[] productGroups) {
+		return getNodesBy(productGroups, null, 0, 0);
 	}
 	
 	public String[] getByUnit(Unit unit) {
