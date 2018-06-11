@@ -3,15 +3,13 @@ package shopping.list;
 class ListItem {
 	
 	private final String description;
-	private int quantity;
-	private final int defaultQuantity;
+	private final int quantity;
 	private final Unit unit;
 	private final ProductGroup productGroup;
 
-	ListItem(String description, Unit unit, int defaultQuantity, ProductGroup productGroup) {
+	ListItem(String description, Unit unit, int quantity, ProductGroup productGroup) {
 		this.description = description;
-		this.defaultQuantity = defaultQuantity;
-		this.quantity = 0;
+		this.quantity = quantity;
 		this.unit = unit;
 		this.productGroup = productGroup;
 	}
@@ -20,16 +18,8 @@ class ListItem {
 		return quantity;
 	}
 
-	void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
 	String getDescription() {
 		return description;
-	}
-
-	int getDefaultQuantity() {
-		return defaultQuantity;
 	}
 
 	Unit getUnit() {
@@ -40,38 +30,17 @@ class ListItem {
 		return productGroup;
 	}
 	
-	
-	boolean getNeeded() {
-		boolean needed = getQuantity() == 0 ? false : true ;
-		return needed;
-	}
-	
-	void setNeeded(boolean needed) {
-		int quantity = needed ? getDefaultQuantity() : 0;
-		setQuantity(quantity);
-	}
-	
 	String getStats() {
 		return "ListItem [description: " + getDescription() + ", product group: " 
-				+ getProductGroup() + ", currently needed: " + getQuantity()
-				+ " " + getUnit() + " (default: " + getDefaultQuantity() + ")]";
+				+ getProductGroup() + ", needed: " + getQuantity()
+				+ " " + getUnit() + "]";
 	}
+	// scrap if not needed
 
 	@Override
 	public String toString() {
-		String result;
-		if (getQuantity() == 0) {
-			result = "No " + getDescription() + " currently needed.";
-		} else {
-			result = getQuantity() + " " + unit + " of " + description + " are currently needed.";
-		}
-//		result =  "ListItem [getQuantity()=" + getQuantity() + ", getDescription()=" + getDescription()
-//				+ ", getDefaultQuantity()=" + getDefaultQuantity() + ", getUnit()=" + getUnit() + ", getProductGroup()="
-//				+ getProductGroup() + ", getNeeded()=" + getNeeded() + "]";
+		return getQuantity() + " " + getUnit() + " of " + getDescription() + " needed from " + getProductGroup() + ".";
 		
-		return result;
 	}
 	
-	
-
 }

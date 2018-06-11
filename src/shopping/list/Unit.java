@@ -1,6 +1,6 @@
 package shopping.list;
 
 enum Unit {
-	packs, kilo, liters
+	packs, kilos, liters
 
 }

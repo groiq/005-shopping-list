@@ -1,6 +1,6 @@
 package shopping.list;
 
 enum ProductGroup {
-	produce, cooling, pastries, drinks
+	aaa, bbb, ccc
 
 }
