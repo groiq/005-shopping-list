@@ -54,11 +54,23 @@ public class ShoppingList {
 		while (currNode.getNextNode() != null) {
 			currNode = currNode.getNextNode();
 			// insert check for conditions here
-			interimList[listPosition] = true;
-			resultCounter += 1;
+			boolean itemSelected = true;
+			// !!! This might run into trouble after deleting some nodes!
+			if (productGroup != null && currNode.getProductGroup() != productGroup) { itemSelected = false; }
+			if (unit != null && currNode.getUnit() != unit) { itemSelected = false; }
+			if (quantity != 0 && currNode.getQuantity() != quantity) { itemSelected = false; }
+			if (id != 0 && currNode.getId() != id) { itemSelected = false; }
+			interimList[listPosition] = itemSelected;
+			if (itemSelected == true) { resultCounter += 1; }
 			// end of check
+//			Out.println(interimList[listPosition] + ": " + currNode.getItem());
 			listPosition += 1;
 		}
+		while (listPosition < counter) {	// maybe necessary after deleting nodes. Check.
+			interimList[listPosition] = false;
+			listPosition += 1;
+		}
+//		Out.println(interimList.toString());
 		String[] result = new String[resultCounter];
 		listPosition = 0;
 		resultCounter = 0;
@@ -75,8 +87,24 @@ public class ShoppingList {
 	}
 
 	public String[] getAll() {
-		return getNodesBy(null, null, -1, 0);
+		return getNodesBy(null, null, 0, 0);
 		
+	}
+	
+	public String[] getByProductGroup(ProductGroup productGroup) {
+		return getNodesBy(productGroup, null, 0, 0);
+	}
+	
+	public String[] getByUnit(Unit unit) {
+		return getNodesBy(null, unit, 0, 0);
+	}
+	
+	public String[] getByQuantity(int quantity) {
+		return getNodesBy(null, null, quantity, 0);
+	}
+	
+	public String[] getByID(int id) {
+		return getNodesBy(null, null, 0, id);
 	}
 	
 //	Delete
