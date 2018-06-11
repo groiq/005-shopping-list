@@ -31,32 +31,19 @@ public class ShoppingMain {
 		Out.println("Creating nodes...");
 		String descr = In.readWord();
 		while (In.done()) {
-//			String pgs = In.readWord();
-//			ProductGroup pg = ProductGroup.valueOf(pgs);
 			ProductGroup pg = ProductGroup.valueOf(In.readWord());
 			Unit unit = Unit.valueOf(In.readWord());
 			int defaultQuantity = In.readInt();
-//			Out.print("Created: ");
-			// comment this out to test for empty list
-			groceryList.newItem(descr, unit, defaultQuantity, pg);
+			groceryList.newItem(descr, unit, defaultQuantity, pg);	// comment this out to test for empty list
 			descr = In.readWord();
 			
 		}
 		
-		
 		getAll();
-		
 		
 		// REad
 		
-		// Update
-		
 		// Delete
-		
-		
-		
-
-		
 
 	}
 
