@@ -2,6 +2,8 @@ package shopping.list;
 
 import inout.In;
 import inout.Out;
+import static shopping.list.ProductGroup.*;
+import static shopping.list.Unit.*;
 
 public class ShoppingMain {
 	
@@ -42,6 +44,11 @@ public class ShoppingMain {
 		getAll();
 		
 		// REad
+		
+		printList(groceryList.getByProductGroup(aaa),"Showing group aaa:");
+		printList(groceryList.getByUnit(packs),"Showing all packs:");
+		printList(groceryList.getByQuantity(4),"Showing by quantity 4:");
+		printList(groceryList.getByID(6),"Showing item no 6:");
 		
 		// Delete
 
