@@ -49,4 +49,9 @@ class ListNode {
 		return item != null ? item.getProductGroup().ordinal() : -1;
 	}
 
+	@Override
+	public String toString() {
+		return getItem().toString();
+	}
+
 }

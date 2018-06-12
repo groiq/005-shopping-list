@@ -11,8 +11,12 @@ public class ShoppingMain {
 	
 	private static void printList(String[] entries, String comment) {
 		Out.println(comment);
-		for (String entry : entries) {
-			Out.println(entry);
+		if (entries.length == 0) {
+			Out.println("No entries found.");
+		} else {
+			for (String entry : entries) {
+				Out.println(entry);
+			}
 		}
 		Out.println();
 	}
@@ -45,14 +49,32 @@ public class ShoppingMain {
 		
 		// REad
 		ProductGroup[] singleProductGroup = {aaa};
-		printList(groceryList.getByProductGroup(singleProductGroup),"Showing group aaa:");
 		ProductGroup[] twoProductGroups = {bbb,ccc};
-		printList(groceryList.getByProductGroup(twoProductGroups),"Showing two product groups:");
-		printList(groceryList.getByUnit(packs),"Showing all packs:");
-		printList(groceryList.getByQuantity(4),"Showing by quantity 4:");
-		printList(groceryList.getByID(6),"Showing item no 6:");
+		printList(groceryList.getNodesBy(singleProductGroup),"Showing group aaa:");
+		printList(groceryList.getNodesBy(twoProductGroups),"Showing two product groups:");
+		printList(groceryList.getNodesBy(packs),"Showing all packs:");
+		printList(groceryList.getNodesBy(4),"Showing by quantity 4:");
+		printList(groceryList.getNodesBy(twoProductGroups, kilos), "kilos from two groups:");
+		printList(groceryList.getNodesBy(twoProductGroups, 4), "quantity 4 from two groups:");
+		printList(groceryList.getNodesBy(liters, 4), "liters with quantity 4:");
+		Out.println("Showing a single node:");
+		Out.println(groceryList.getNode(6));
+		Out.println();
+		Out.println("a non-existent node:");
+		Out.println(groceryList.getNode(100));
+		Out.println();
+		
 		
 		// Delete
+		Out.println("Deleting node #3...");
+		groceryList.deleteNode(3);
+		getAll();
+		Out.println("deleting a non-existent node...");
+		groceryList.deleteNode(100);
+		getAll();
+		Out.println("Deleting two entire product groups...");
+		groceryList.deleteByProductGroup(twoProductGroups);
+		getAll();
 
 	}
 
