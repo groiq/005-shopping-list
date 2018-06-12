@@ -2,11 +2,15 @@ package shopping.list;
 
 class ListItem {
 	
+	// Fields
+	
 	private final String description;
 	private final int quantity;
 	private final Unit unit;
 	private final ProductGroup productGroup;
 
+	//Constructor
+	
 	ListItem(String description, Unit unit, int quantity, ProductGroup productGroup) {
 		this.description = description;
 		this.quantity = quantity;
@@ -14,6 +18,8 @@ class ListItem {
 		this.productGroup = productGroup;
 	}
 
+	//Getters
+	
 	int getQuantity() {
 		return quantity;
 	}
@@ -29,18 +35,12 @@ class ListItem {
 	ProductGroup getProductGroup() {
 		return productGroup;
 	}
-	
-	String getStats() {
-		return "ListItem [description: " + getDescription() + ", product group: " 
-				+ getProductGroup() + ", needed: " + getQuantity()
-				+ " " + getUnit() + "]";
-	}
-	// scrap if not needed
 
+//	toString()
+	
 	@Override
 	public String toString() {
 		return getQuantity() + " " + getUnit() + " of " + getDescription() + " needed from " + getProductGroup() + ".";
-		
 	}
 	
 }
