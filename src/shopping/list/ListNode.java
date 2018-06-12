@@ -51,7 +51,7 @@ class ListNode {
 
 	@Override
 	public String toString() {
-		return getItem().toString();
+		return "#" + this.getId() + ": " +getItem().toString();
 	}
 
 }

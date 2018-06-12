@@ -39,8 +39,8 @@ public class ShoppingMain {
 		while (In.done()) {
 			ProductGroup pg = ProductGroup.valueOf(In.readWord());
 			Unit unit = Unit.valueOf(In.readWord());
-			int defaultQuantity = In.readInt();
-			groceryList.newItem(descr, unit, defaultQuantity, pg);	// comment this out to test for empty list
+			int quantity = In.readInt();
+			groceryList.newItem(descr, unit, quantity, pg);	// comment this out to test for empty list
 			descr = In.readWord();
 			
 		}
@@ -59,6 +59,7 @@ public class ShoppingMain {
 		printList(groceryList.getNodesBy(liters, 4), "liters with quantity 4:");
 		Out.println("Showing a single node:");
 		Out.println(groceryList.getNode(6));
+		Out.println(groceryList.getNode(3));
 		Out.println();
 		Out.println("a non-existent node:");
 		Out.println(groceryList.getNode(100));

@@ -1,6 +1,10 @@
 Project Task Outline
 ====================
 
+test getters, setters, toString() etc.
+test all for cases of empty list
+test all for cases where no nodes are found
+
 - [ ] Various tasks
     - [ ] Implement Unit enum
     - [ ] Implement Product Group enum
