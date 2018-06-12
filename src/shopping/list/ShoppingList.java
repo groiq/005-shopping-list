@@ -3,10 +3,11 @@ package shopping.list;
 import inout.Out;
 
 public class ShoppingList {
-	
+
+//	--------------------------------------------------------------
 //	Fields, constructor, getters, setters
-//	-------------------------------------
-	
+//	--------------------------------------------------------------
+
 	private final ListNode dummyNode;
 	private int counter;
 
@@ -27,16 +28,15 @@ public class ShoppingList {
 		return dummyNode;
 	}
 	
-//	Create
-//	-----
+//	--------------------------------------------------------------
+//	Create a new node
+//	--------------------------------------------------------------
 
 	void newItem(String description, Unit unit, int quantity, ProductGroup productGroup) {
 		ListItem newItem = new ListItem(description, unit, quantity, productGroup);
-//		Out.println(item);
 		counter += 1;
 		ListNode newNode = new ListNode(counter, newItem);
 		ListNode prevNode = dummyNode;
-//		Out.print(newNode.getQuantity() + ", " + newItem.getQuantity());
 		while (prevNode.getNextNode() != null && newNode.getProductOrder() > prevNode.getNextNode().getProductOrder()) {
 			prevNode = prevNode.getNextNode();
 		}
@@ -44,7 +44,11 @@ public class ShoppingList {
 		prevNode.setNextNode(newNode);
 	}
 	
-//	Read
+//	--------------------------------------------------------------
+//	Read list of nodes
+//	--------------------------------------------------------------
+	
+//	Generate Array of nodes
 	
 	private ListNode[] selectBy(ProductGroup[] productGroups, Unit unit, int quantity) {
 		boolean[] interimList = new boolean[counter];
@@ -54,29 +58,19 @@ public class ShoppingList {
 		while (currNode.getNextNode() != null) {
 			currNode = currNode.getNextNode();
 			boolean itemSelected = true;
-			// !!! This might run into trouble after deleting some nodes!
-//			if (productGroup != null && currNode.getProductGroup() != productGroup) { itemSelected = false; }
-			if (productGroups != null) {
+			// if itemSelected isn't already false, check for product groups
+			if (itemSelected == true && productGroups != null) {
 				itemSelected = false;
 				for (ProductGroup productGroup : productGroups) {
 					if (currNode.getProductGroup() == productGroup) { itemSelected = true; }
 				}
 			}
-			// If I have another parameter before this, I'll need a return statement, otherwise itemSelected could be already false 
-			// and then be set to true by this piece of code.
 			if (unit != null && currNode.getUnit() != unit) { itemSelected = false; }
 			if (quantity != 0 && currNode.getQuantity() != quantity) { itemSelected = false; }
 			interimList[listPosition] = itemSelected;
 			if (itemSelected == true) { resultCounter += 1; }
-			// end of check
-//			Out.println(interimList[listPosition] + ": " + currNode.getItem());
 			listPosition += 1;
 		}
-		while (listPosition < counter) {	// maybe necessary after deleting nodes. Check.
-			interimList[listPosition] = false;
-			listPosition += 1;
-		}
-//		Out.println(interimList.toString());
 		ListNode[] result = new ListNode[resultCounter];
 		listPosition = 0;
 		resultCounter = 0;
@@ -84,13 +78,15 @@ public class ShoppingList {
 		while (currNode.getNextNode() != null) {
 			currNode = currNode.getNextNode();
 			if (interimList[listPosition] == true) {
-				result[resultCounter] = currNode;	// todo: make a short description
+				result[resultCounter] = currNode;
 				resultCounter += 1;
 			}
 			listPosition += 1;
 		}
 		return result;
 	}
+
+//	fetch nodes as an array of strings
 	
 	public String[] getNodesBy(ProductGroup[] productGroups, Unit unit, int quantity) {
 		ListNode[] resultObjects = selectBy(productGroups, unit, quantity);
@@ -133,6 +129,7 @@ public class ShoppingList {
 		return getNodesBy(null, null, 0);
 	}
 	
+//	get a single node by id
 	
 	public String getNode(int id) {
 		String result = "Error: Node not found.";
@@ -147,14 +144,15 @@ public class ShoppingList {
 		return result;
 	}
 	
+//	--------------------------------------------------------------
 //	delete
+//	--------------------------------------------------------------
 	
 	public void deleteByProductGroup(ProductGroup[] productGroups) {
 		ListNode currNode = dummyNode;
 		ListNode prevNode = dummyNode;
 		boolean toDelete = false;
 		while (currNode.getNextNode() != null) {
-//			prevNode = currNode;
 			toDelete = false;
 			currNode = currNode.getNextNode();
 			for(ProductGroup productGroup : productGroups) {
@@ -187,40 +185,5 @@ public class ShoppingList {
 		}
 	}
 	
-//	private ListNode[] getNodesBy() {
-//		return getNodesBy(null, null, 0, 0);
-//	}
-//	
-//	private ListNode[] getNodesBy(ProductGroup[] productGroups) {
-//		return getNodesBy(productGroups, null, 0, 0);
-//	}
-//	
-//	private ListNode[] getNodesBy(Unit unit) {
-//		return getNodesBy(null, unit, 0, 0);
-//	}
-//	
-//	private ListNode[] getNodesBy(int quantity) {
-//		return getNodesBy(null, null, quantity, 0);
-//	}
-//	
-//	private ListNode[] getNodesBy(ProductGroup[] productGroups, Unit unit) {
-//		return getNodesBy(productGroups, unit, 0, 0);
-//	}
-//	
-//	private ListNode[] getNodesBy(ProductGroup[] productGroups, int quantity) {
-//		return getNodesBy(productGroups, null, quantity, 0);
-//	}
-//	
-//	private ListNode[] getNodesBy(Unit unit, int quantity) {
-//		return getNodesBy(null, unit, quantity, 0);
-//	}
-//	
-//	private ListNode[] getNodesBy(ProductGroup[] productGroups, Unit unit, int quantity) {
-//		return getNodesBy(productGroups, unit, quantity, 0);
-//	}
-		
-	
-	
-//	Delete
 
 }

@@ -1,18 +1,22 @@
 package shopping.list;
 
-import inout.Out;
-
 class ListNode {
+
+	// Fields
 	
 	private final int id;
 	private ListNode nextNode;
 	private final ListItem item;
 
+	// Constructor
+	
 	ListNode(int id, ListItem item) {
 		this.id = id;
 		this.item = item;
 	}
 
+	// Getters and setters
+	
 	ListNode getNextNode() {
 		return nextNode;
 	}
@@ -49,6 +53,8 @@ class ListNode {
 		return item != null ? item.getProductGroup().ordinal() : -1;
 	}
 
+	// toString()
+	
 	@Override
 	public String toString() {
 		return "#" + this.getId() + ": " +getItem().toString();
