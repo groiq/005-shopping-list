@@ -32,7 +32,7 @@ public class ShoppingList {
 //	Create a new node
 //	--------------------------------------------------------------
 
-	void newItem(String description, Unit unit, int quantity, ProductGroup productGroup) {
+	public void newItem(String description, Unit unit, int quantity, ProductGroup productGroup) {
 		// create the listItem object
 		ListItem newItem = new ListItem(description, unit, quantity, productGroup);
 		// create listNode object
