@@ -33,16 +33,16 @@ public class ShoppingListInterface {
 			groceryList.newItem(descr, unit, quantity, pg);
 			descr = In.readWord();			
 		}
+		In.close();
 		Out.println("done.");
 		Out.println();
 		
 		// print options and read selection
 		printAvailable();
-		selectionCycle();
+		interactionCycle();
 
 
 	}
-
 
 	private static void separate() {
 		Out.println("===========================================");
@@ -62,10 +62,33 @@ public class ShoppingListInterface {
 		separate();
 		Out.println("h: show this list");
 		Out.println("q: quit");
+		separate();
 	}
 	
-	private static void selectionCycle() {
-		
+	private static void interactionCycle() {
+		Out.println("Enter one of (1,2,3,4,5,h,q): ");
+		char selection = In.readChar();
+//		char selection = parseInput();
+		if (selection != 'q') {
+			switch (selection) {
+			case '1':
+				Out.println("adding a new item...");
+				break;
+			case '2':
+				break;
+			default:
+				Out.print("Error: not a valid selection. ");
+			}
+			interactionCycle();
+		} else {
+			Out.println("Exiting...");
+		}
+	}
+
+	private static char parseInput() {
+		Out.println("Enter one of (1,2,3,4,5,h,q): ");
+		char selection = In.readChar();
+		return selection;
 	}
 	
 }
