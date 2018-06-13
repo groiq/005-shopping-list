@@ -121,35 +121,78 @@ public class ShoppingListInterface {
 			Out.println("Exiting...");
 		}
 	}
-
+	
 	private static ProductGroup[] selectMultipleProductGroups() {
-		Out.println("Available product groups:");
+		Out.println("If you select one or more product groups, all nodes with any of those groups are found.");
+		Out.println("If you select no product groups, nodes of all product groups will be found.");
+		Out.println("For each product group, type 'y' to select or 'n' to deselect: ");
 		ProductGroup[] pgValues = ProductGroup.values();
-		boolean[] pgSelected = new boolean[pgValues.length];
-		for (ProductGroup value : pgValues) {
-			Out.println(value.ordinal() + ": " + value);
-		}
-		Out.println("selected: []");
-		Out.print("To add or remove a product group, type its number. To finish selecting, press enter: ");
-		int pgNum = In.readInt();
-		while (In.done() && pgNum > -1 && pgNum < pgValues.length) {
-			pgSelected[pgNum] = !pgSelected[pgNum];
-			Out.print("currently selected: [");
-			for (int i = 0; i < pgValues.length; i++) {
-				if (pgSelected[i] == true) Out.print(pgValues[i] + ", ");
+		int listPos = 0;
+		int counter = 0;
+		boolean validInput;
+		char choice;
+		boolean[] selected = new boolean[pgValues.length];
+		while (listPos < pgValues.length) {
+			Out.print("Select this group? " + pgValues[listPos] + " > ");
+			choice = In.readChar();
+			if (choice == 'y') {
+//				Out.println("Selected.");
+				counter += 1;
+				selected[listPos] = true;
+			} else if (choice == 'n') {
+//				Out.println("Deselected.");
+				selected[listPos] = false;
+			} else {
+				Out.println("No valid input. Please repeat.");
+				listPos -= 1;
 			}
-			Out.println("]");
-			Out.print("To add or remove a product group, type its number. To finish selecting, press enter: ");
-			pgNum = In.readInt();
+			listPos += 1;
 		}
-		Out.println("done");
-		
-		
-		
-
-		return null;
+		ProductGroup[] result;
+		if (counter > 0) {
+			result = new ProductGroup[counter];
+			int j = 0;
+			for (int i = 0; i < pgValues.length; i++) {
+				if (selected[i] == true) {
+					result[j] = pgValues[i];
+					j += 1;
+				}
+			}
+			Out.println("Your selection:");
+			for (ProductGroup pg : result) {
+				Out.println(pg);
+			}
+		} else {
+			result = null;
+		}
+		return result;
 	}
+		
 
+//	private static ProductGroup[] selectMultipleProductGroups() {
+//		Out.println("Available product groups:");
+//		ProductGroup[] pgValues = ProductGroup.values();
+//		boolean[] pgSelected = new boolean[pgValues.length];
+//		for (ProductGroup value : pgValues) {
+//			Out.println(value);
+//		}
+//		Out.println("selected: []");
+//		Out.print("To add or remove a product group, type its name. To finish selecting, type 'done': ");
+//		String pg = In.readWord();
+//		while (In.done() && pgNum > -1 && pgNum < pgValues.length) {
+//			pgSelected[pgNum] = !pgSelected[pgNum];
+//			Out.print("currently selected: [");
+//			for (int i = 0; i < pgValues.length; i++) {
+//				if (pgSelected[i] == true) Out.print(pgValues[i] + ", ");
+//			}
+//			Out.println("]");
+//			Out.print("To add or remove a product group, type its number. To finish selecting, press enter: ");
+//			pgNum = In.readInt();
+//		}
+//		Out.println("done");
+		
+		
+		
 	private static int selectQuantity() {
 		Out.print("Enter quantity (as integer): ");
 		int quantity = In.readInt();
