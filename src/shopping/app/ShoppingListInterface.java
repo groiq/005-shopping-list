@@ -85,8 +85,8 @@ public class ShoppingListInterface {
 				Out.print("enter description: ");
 				String description = In.readWord();
 				productGroup = selectSingleProductGroup();
-				unit = selectUnit();
-				quantity = selectQuantity();
+				unit = selectUnit(true);
+				quantity = selectQuantity(true);
 				groceryList.newItem(description, unit, quantity, productGroup);
 				Out.println("Created entry: " + quantity + " " + unit + " of " + description + " needed from " + productGroup + ".");
 				break;
@@ -99,8 +99,8 @@ public class ShoppingListInterface {
 				Out.println("print selected items:");
 				Out.println("---------------------");
 				productGroups = selectMultipleProductGroups();
-				unit = selectUnit();
-				quantity = selectQuantity();
+				unit = selectUnit(false);
+				quantity = selectQuantity(false);
 				printList(groceryList.getNodesBy(productGroups, unit, quantity));
 				break;
 			case '4':	// print single
@@ -168,46 +168,34 @@ public class ShoppingListInterface {
 		return result;
 	}
 		
-
-//	private static ProductGroup[] selectMultipleProductGroups() {
-//		Out.println("Available product groups:");
-//		ProductGroup[] pgValues = ProductGroup.values();
-//		boolean[] pgSelected = new boolean[pgValues.length];
-//		for (ProductGroup value : pgValues) {
-//			Out.println(value);
-//		}
-//		Out.println("selected: []");
-//		Out.print("To add or remove a product group, type its name. To finish selecting, type 'done': ");
-//		String pg = In.readWord();
-//		while (In.done() && pgNum > -1 && pgNum < pgValues.length) {
-//			pgSelected[pgNum] = !pgSelected[pgNum];
-//			Out.print("currently selected: [");
-//			for (int i = 0; i < pgValues.length; i++) {
-//				if (pgSelected[i] == true) Out.print(pgValues[i] + ", ");
-//			}
-//			Out.println("]");
-//			Out.print("To add or remove a product group, type its number. To finish selecting, press enter: ");
-//			pgNum = In.readInt();
-//		}
-//		Out.println("done");
-		
-		
-		
-	private static int selectQuantity() {
-		Out.print("Enter quantity (as integer): ");
+	private static int selectQuantity(boolean obligatory) {
+		Out.print("Enter quantity (as integer)");
+		if (obligatory == false) {
+			Out.print(". Enter 0 to ignore quantity");
+		}
+		Out.print(": ");
 		int quantity = In.readInt();
 		return quantity;
 	}
 
-	private static Unit selectUnit() {
+	private static Unit selectUnit(boolean obligatory) {
 		Out.println("Available units:");
+		if (obligatory == false) {
+			Out.println("-1: ignore unit");
+		}
 		Unit[] unitValues = Unit.values();
 		for (Unit value : unitValues) {
-			Out.println(value.ordinal() + ": " + value);
+			Out.println(" " + value.ordinal() + ": " + value);
 		}
 		Out.print("Enter number of selected unit: ");
 		int unitNum = In.readInt();
-		Unit unit = unitValues[unitNum];
+		Unit unit;
+		if (unitNum > -1 && unitNum < unitValues.length) {
+			unit = unitValues[unitNum];
+		} else {
+			unit = null;
+		}
+//		Unit unit = unitValues[unitNum];
 		return unit;
 	}
 
