@@ -1,6 +1,6 @@
 package shopping.list;
 
-enum ProductGroup {
+public enum ProductGroup {
 	aaa, bbb, ccc
 
 }
