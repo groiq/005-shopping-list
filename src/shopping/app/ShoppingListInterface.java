@@ -9,6 +9,11 @@ import shopping.list.Unit;
 public class ShoppingListInterface {
 	
 	final static ShoppingList groceryList = new ShoppingList();
+	private static ProductGroup productGroup;
+	private static ProductGroup[] productGroups;
+	private static Unit unit;
+	private static int quantity;
+	
 	
 	public static void main(String[] args) {
 		
@@ -79,26 +84,9 @@ public class ShoppingListInterface {
 				Out.println("--------------------");
 				Out.print("enter description: ");
 				String description = In.readWord();
-//				In.readLine();
-//				Out.println(description);
-				Out.println("Available product groups:");
-				ProductGroup[] pgValues = ProductGroup.values();
-				for (ProductGroup value : pgValues) {
-					Out.println(value.ordinal() + ": " + value);
-				}
-				Out.print("Enter number of selected product group: ");
-				int pgNum = In.readInt();
-				ProductGroup productGroup = pgValues[pgNum];
-				Out.println("Available units:");
-				Unit[] unitValues = Unit.values();
-				for (Unit value : unitValues) {
-					Out.println(value.ordinal() + ": " + value);
-				}
-				Out.print("Enter number of selected unit: ");
-				int unitNum = In.readInt();
-				Unit unit = unitValues[unitNum];
-				Out.print("Enter quantity (as integer): ");
-				int quantity = In.readInt();
+				productGroup = selectSingleProductGroup();
+				unit = selectUnit();
+				quantity = selectQuantity();
 				groceryList.newItem(description, unit, quantity, productGroup);
 				Out.println("Created entry: " + quantity + " " + unit + " of " + description + " needed from " + productGroup + ".");
 				break;
@@ -108,6 +96,12 @@ public class ShoppingListInterface {
 				printList(groceryList.getAll());
 				break;
 			case '3':	// print selected
+				Out.println("print selected items:");
+				Out.println("---------------------");
+				productGroups = selectMultipleProductGroups();
+				unit = selectUnit();
+				quantity = selectQuantity();
+				printList(groceryList.getNodesBy(productGroups, unit, quantity));
 				break;
 			case '4':	// print single
 				break;
@@ -126,6 +120,64 @@ public class ShoppingListInterface {
 		} else {
 			Out.println("Exiting...");
 		}
+	}
+
+	private static ProductGroup[] selectMultipleProductGroups() {
+		Out.println("Available product groups:");
+		ProductGroup[] pgValues = ProductGroup.values();
+		boolean[] pgSelected = new boolean[pgValues.length];
+		for (ProductGroup value : pgValues) {
+			Out.println(value.ordinal() + ": " + value);
+		}
+		Out.println("selected: []");
+		Out.print("To add or remove a product group, type its number. To finish selecting, press enter: ");
+		int pgNum = In.readInt();
+		while (In.done() && pgNum > -1 && pgNum < pgValues.length) {
+			pgSelected[pgNum] = !pgSelected[pgNum];
+			Out.print("currently selected: [");
+			for (int i = 0; i < pgValues.length; i++) {
+				if (pgSelected[i] == true) Out.print(pgValues[i] + ", ");
+			}
+			Out.println("]");
+			Out.print("To add or remove a product group, type its number. To finish selecting, press enter: ");
+			pgNum = In.readInt();
+		}
+		Out.println("done");
+		
+		
+		
+
+		return null;
+	}
+
+	private static int selectQuantity() {
+		Out.print("Enter quantity (as integer): ");
+		int quantity = In.readInt();
+		return quantity;
+	}
+
+	private static Unit selectUnit() {
+		Out.println("Available units:");
+		Unit[] unitValues = Unit.values();
+		for (Unit value : unitValues) {
+			Out.println(value.ordinal() + ": " + value);
+		}
+		Out.print("Enter number of selected unit: ");
+		int unitNum = In.readInt();
+		Unit unit = unitValues[unitNum];
+		return unit;
+	}
+
+	private static ProductGroup selectSingleProductGroup() {
+		Out.println("Available product groups:");
+		ProductGroup[] pgValues = ProductGroup.values();
+		for (ProductGroup value : pgValues) {
+			Out.println(value.ordinal() + ": " + value);
+		}
+		Out.print("Enter number of selected product group: ");
+		int pgNum = In.readInt();
+		ProductGroup productGroup = pgValues[pgNum];
+		return productGroup;
 	}
 
 	private static char parseInput() {
