@@ -13,6 +13,7 @@ public class ShoppingListInterface {
 	private static ProductGroup[] productGroups;
 	private static Unit unit;
 	private static int quantity;
+	private static int id;
 	
 	
 	public static void main(String[] args) {
@@ -62,7 +63,7 @@ public class ShoppingListInterface {
 		separate();
 		Out.println("2: Print all items");
 		Out.println("3: Print a selection of items");
-		Out.println("4: Print a single item (by ID");
+		Out.println("4: Print a single item (by ID)");
 		separate();
 		Out.println("5: Delete an item (by ID)");
 		Out.println("6: Delete all items of one product group");
@@ -104,10 +105,22 @@ public class ShoppingListInterface {
 				printList(groceryList.getNodesBy(productGroups, unit, quantity));
 				break;
 			case '4':	// print single
+				Out.println("print a single item by ID");
+				Out.println("-------------------------");
+				id = selectID();
+				Out.println(groceryList.getNode(id));
 				break;
-			case '5':	// delete single 
+			case '5':	// delete single
+				Out.println("delete a single item by ID");
+				Out.println("--------------------------");
+				id = selectID();
+				groceryList.deleteNode(id);
 				break;
 			case '6':	// delete by group
+				Out.println("delete all items in a specific product group");
+				Out.println("--------------------------------------------");
+				productGroups = selectMultipleProductGroups();
+				groceryList.deleteByProductGroup(productGroups);
 				break;
 			case 'h':	// print menu
 				printAvailable();
@@ -122,6 +135,12 @@ public class ShoppingListInterface {
 		}
 	}
 	
+	private static int selectID() {
+		Out.print("Enter id (as integer):");
+		int id = In.readInt();
+		return id;
+	}
+
 	private static ProductGroup[] selectMultipleProductGroups() {
 		Out.println("If you select one or more product groups, all nodes with any of those groups are found.");
 		Out.println("If you select no product groups, nodes of all product groups will be found.");
