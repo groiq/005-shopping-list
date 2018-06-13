@@ -148,7 +148,6 @@ public class ShoppingListInterface {
 		ProductGroup[] pgValues = ProductGroup.values();
 		int listPos = 0;
 		int counter = 0;
-		boolean validInput;
 		char choice;
 		boolean[] selected = new boolean[pgValues.length];
 		while (listPos < pgValues.length) {
