@@ -169,22 +169,18 @@ public class ShoppingList {
 	public void deleteByProductGroup(ProductGroup[] productGroups) {
 		ListNode currNode = dummyNode;
 		ListNode prevNode = dummyNode;
-		boolean toDelete;
 		// loop through all nodes and check each for deletion
 		while (currNode.getNextNode() != null) {
 			currNode = currNode.getNextNode();
-			// for each node, loop through the given product groups and mark it for deletion if there's a match.
-			toDelete = false;
-			for(ProductGroup productGroup : productGroups) {
+			// for each node, loop through the given product groups and delete it if there's a match.
+			for ( ProductGroup productGroup : productGroups) {
 				if (currNode.getProductGroup() == productGroup) {
-					toDelete = true;
+					prevNode.setNextNode(currNode.getNextNode());
 					break;
 				}
 			}
-			// If node is marked for deletion, unlink it. Otherwise it becomes the next prevNode.
-			if (toDelete == true) {
-				prevNode.setNextNode(currNode.getNextNode());
-			} else {
+			// if the node node is still there, it becomes the next prevNode.
+			if (prevNode.getNextNode() == currNode) {
 				prevNode = currNode;
 			}
 		}
