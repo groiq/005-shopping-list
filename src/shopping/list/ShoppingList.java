@@ -67,7 +67,7 @@ public class ShoppingList {
 			currNode = currNode.getNextNode();
 			boolean itemSelected = true;
 			// if itemSelected isn't already false, check for product groups
-			if (itemSelected == true && productGroups != null) {
+			if (itemSelected == true && productGroups != null && productGroups.length > 0) {
 				itemSelected = false;
 				for (ProductGroup productGroup : productGroups) {
 					if (currNode.getProductGroup() == productGroup) { itemSelected = true; }
@@ -118,11 +118,11 @@ public class ShoppingList {
 	}
 	
 	public String[] getNodesBy(Unit unit) {
-		return getNodesBy(null, unit, 0);
+		return getNodesBy(new ProductGroup[0], unit, 0);
 	}
 	
 	public String[] getNodesBy(int quantity) {
-		return getNodesBy(null, null, quantity);
+		return getNodesBy(new ProductGroup[0], null, quantity);
 	}
 	
 	public String[] getNodesBy(ProductGroup[] productGroups, Unit unit) {
@@ -134,15 +134,15 @@ public class ShoppingList {
 	}
 	
 	public String[] getNodesBy(Unit unit, int quantity) {
-		return getNodesBy(null, unit, quantity);
+		return getNodesBy(new ProductGroup[0], unit, quantity);
 	}
 	
 	public String[] getNodesBy() {
-		return getNodesBy(null, null, 0);
+		return getNodesBy(new ProductGroup[0], null, 0);
 	}
 	
 	public String[] getAll() {
-		return getNodesBy(null, null, 0);
+		return getNodesBy(new ProductGroup[0], null, 0);
 	}
 	
 //	get a single node by id
