@@ -68,7 +68,6 @@ public class ShoppingMain {
 		Out.println(groceryList.getNode(100));
 		Out.println();
 		
-		
 		// Delete nodes
 		Out.println("Deleting node #3...");
 		groceryList.deleteNode(3);

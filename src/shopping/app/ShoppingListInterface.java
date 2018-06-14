@@ -144,6 +144,7 @@ public class ShoppingListInterface {
 	private static ProductGroup[] selectMultipleProductGroups() {
 		Out.println("If you select one or more product groups, all nodes with any of those groups are found.");
 		Out.println("If you select no product groups, nodes of all product groups will be found.");
+		// this works differently for the deletion method!
 		Out.println("For each product group, type 'y' to select or 'n' to deselect: ");
 		ProductGroup[] pgValues = ProductGroup.values();
 		int listPos = 0;
